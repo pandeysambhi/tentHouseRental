@@ -1,11 +1,16 @@
 const mongoose=require("mongoose")
 
-const ProductSchema=new mongoose.Schema({
+const customerSchema=new mongoose.Schema({
      name:
     {
         type: String,
         required:true
     },
+    Customer_id:{
+        type: String,
+        required:true,
+        unique:true
+    }
    
 })
 

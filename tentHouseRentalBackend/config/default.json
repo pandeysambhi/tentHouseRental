@@ -1,0 +1,4 @@
+{
+    "mongoURI":"mongodb+srv://sam1234:sam1234@cluster0.dlfs5.mongodb.net/tentHouseRental?retryWrites=true&w=majority",
+    "jwtSecret":"phineas"
+}
