@@ -1,17 +1,17 @@
 import React,{useState,useEffect} from 'react';
 import CardView from './cardview'
 import {CardDeck,Form,FormControl,Button} from 'react-bootstrap'
-
+import {getAllProducts} from "../Data/ProductApi"
 
 
 const Product=(props)=>{
   //----------------------------Retrieval and storage of user data---------------------------------------------------------------------
      const [data,setData]=useState([]);
        const[filter,setFilter]=useState("")
-    // useEffect(()=>{Userapi(handleData) },[])
+     useEffect(()=>{getAllProducts(handleData) },[])
      let message="";
     // let view=[];
-    //  const handleData=(userdata)=>{ setData(userdata);}
+      const handleData=(userdata)=>{ setData(userdata);}
     
     //----------------------------------------------------------------------------------------------------------------------------
 
@@ -47,8 +47,9 @@ const Product=(props)=>{
         //  -------------------------------------------------------------------------------------------------------------------------------
         //
 
-         let view = data.map((detail) => {
-             return  <CardView info={detail} key={detail.id}/>})
+        const imgsrc="https://via.placeholder.com/150/000000/FFFFFF/?text=product"
+         let view = data.map((detail,index) => {
+             return  <CardView info={detail} key={index} imgsrc={imgsrc}/>})
       
         
 const handleClick=()=>{

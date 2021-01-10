@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Form, Button } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { addNewUser } from "../Data/UserAPi";
 
 
 const CONTAINER = styled.div`
@@ -70,10 +71,7 @@ let values = {};
 const initialValues = {
   email: "",
   password: "",
-  firstname: "",
-  lastname: "",
-  locations: "",
-  mobile: "",
+  name: ""
 };
 
 // Schema for yup
@@ -85,36 +83,27 @@ const validationSchema = Yup.object({
     .min(8, "Password is too short - should be 8 chars minimum.")
     .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
 
-  firstname: Yup.string().required("Required"),
-  lastname: Yup.string().required("Required"),
-
-  locations: Yup.string().required("Required"),
-  mobile: Yup.number().required("Required"),
+  name: Yup.string().required("Required"),
+ 
 });
 
-const Register = () => {
-  const onSubmit = (value, onSubmitProps) => {
-    console.log(value.name);
-
-    values = {
-      Email: value.email,
-      Password: value.password,
-      Firstname: value.firstname,
-      Lastname: value.lastname,
-      Locations: value.location,
-      Mobile: value.mobile,
-    };
-
-    // /UserAPI.saveData(values);
-
+const Register = (props) => {
+  
+ const onSubmit = (value, onSubmitProps) => {
+    values={
+      email:props.email,
+      password:props.password
+    }
+   addNewUser(values)
+    console.log("-------",localStorage.getItem('jsonToken'))
+    props.history.push("/Products");
     onSubmitProps.resetForm();
   };
 
   return (
     <div style={{ marginTop: 50 }}>
-      <br />
       <h4 style={{ textAlign: "center", margin: "auto" }}>
-        Sign Up to Explore
+        Log In to Continue
       </h4>
       <CONTAINER>
         <Formik
@@ -132,7 +121,7 @@ const Register = () => {
             isSubmitting,
           }) => (
             <MYFORM onSubmit={handleSubmit} className="mx-auto">
-              <Form.Group controlId="email">
+              <Form.Group controlId="formEmail">
                 <Form.Label>Email :</Form.Label>
                 <Form.Control
                   type="text"
@@ -147,7 +136,7 @@ const Register = () => {
                   <div className="error-message">{errors.email}</div>
                 ) : null}
               </Form.Group>
-              <Form.Group controlId="password">
+              <Form.Group controlId="formPassword">
                 <Form.Label>Password :</Form.Label>
                 <Form.Control
                   type="password"
@@ -156,71 +145,27 @@ const Register = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
+                  className={touched.password && errors.password ? "error" : null}
+                />
+
+                {touched.password && errors.password ? (
+                  <div className="error-message">{errors.password}</div>
+                ) : null}
+              </Form.Group>
+              <Form.Group controlId="formName">
+                <Form.Label>Name :</Form.Label>
+                <Form.Control
+                  type="name"
+                  name="name"
+                  placeholder="name"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
                   className={touched.name && errors.name ? "error" : null}
                 />
 
                 {touched.name && errors.name ? (
                   <div className="error-message">{errors.name}</div>
-                ) : null}
-              </Form.Group>
-              <Form.Group controlId="firstname">
-                <Form.Label>First Name :</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="firstname"
-                  placeholder="firstname"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.firstname}
-                  className={touched.email && errors.email ? "error" : null}
-                />
-                {touched.email && errors.email ? (
-                  <div className="error-message">{errors.email}</div>
-                ) : null}
-              </Form.Group>
-              <Form.Group controlId="lastname">
-                <Form.Label>Last Name:</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="lastname"
-                  placeholder="lastname"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.lastname}
-                  className={touched.email && errors.email ? "error" : null}
-                />
-                {touched.email && errors.email ? (
-                  <div className="error-message">{errors.email}</div>
-                ) : null}
-              </Form.Group>
-              <Form.Group controlId="locations">
-                <Form.Label>Location:</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="locations"
-                  placeholder="locations"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.locations}
-                  className={touched.email && errors.email ? "error" : null}
-                />
-                {touched.email && errors.email ? (
-                  <div className="error-message">{errors.email}</div>
-                ) : null}
-              </Form.Group>
-              <Form.Group controlId="mobile">
-                <Form.Label>Mobile :</Form.Label>
-                <Form.Control
-                  type="number"
-                  name="mobile"
-                  placeholder="mobile"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.mobile}
-                  className={touched.email && errors.email ? "error" : null}
-                />
-                {touched.email && errors.email ? (
-                  <div className="error-message">{errors.email}</div>
                 ) : null}
               </Form.Group>
 

@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import { Form, Button } from "react-bootstrap";
 import styled from "styled-components";
 import * as Yup from "yup";
+import {addNewCustomer} from "../Data/CustomerAPi"
 
 
 const CONTAINER = styled.div`
@@ -69,35 +70,28 @@ const BUTTON = styled(Button)`
 
 let values = {};
 const initialValues = {
-  productName: "",
-  productDescription: "",
-  manufacturer: "",
-  price: "",
-  quantity: "",
+  name: "",
+  Customer_id: "",
+ 
 };
 
 const validationSchema = Yup.object({
-  productName: Yup.string().required("Name is required"),
+  name: Yup.string().required("Name is required"),
 
-  productDescription: Yup.string().required("No password provided."),
+  Customer_id: Yup.string().required("Customer Id required."),
 
-  manufacturer: Yup.string().required("Required"),
-  price: Yup.number().required("Required"),
-  quantity: Yup.number().required("Required"),
+ 
 });
 
 function AddCustomer() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const onSubmit = (value, onSubmitProps) => {
     values = {
-      ProductName: value.productName,
-      ProductDescription: value.productDescription,
-      Manufacturer: value.manufacturer,
-      Price: value.price,
-      Quantity: value.quantity,
+     name: value.name,
+     Customer_id:value.Customer_id
     };
     let views = 0;
-    // ProductAPI.saveData(values);
+   addNewCustomer(values);
     // ViewDataAPI.saveViewData(views);
     console.log(values)
     setIsSubmitted(true);
@@ -107,7 +101,7 @@ function AddCustomer() {
   return (
     <div style={{ marginTop: 50 }}>
       <br />
-      <h3 style={{ textAlign: "center" }}>Add Product to Inventory</h3>
+      <h3 style={{ textAlign: "center" }}>Add New Customer</h3>
       <Prompt
         when={!isSubmitted}
         message={({ pathname }) => {
@@ -132,94 +126,50 @@ function AddCustomer() {
             isSubmitting,
           }) => (
             <MYFORM onSubmit={handleSubmit} className="mx-auto">
-              <Form.Group controlId="productName">
-                <Form.Label>Product Name :</Form.Label>
+              <Form.Group controlId="name">
+                <Form.Label>Customer Name :</Form.Label>
                 <Form.Control
                   type="text"
-                  name="productName"
-                  placeholder="productName"
+                  name="name"
+                  placeholder="Customer name"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.productName}
+                  value={values.name}
                   className={
-                    touched.productName && errors.productName ? "error" : null
+                    touched.name && errors.name ? "error" : null
                   }
                 />
-                {touched.productName && errors.productName ? (
-                  <div className="error-message">{errors.productName}</div>
+                {touched.name && errors.name ? (
+                  <div className="error-message">{errors.name}</div>
                 ) : null}
               </Form.Group>
-              <Form.Group controlId="productDescription">
-                <Form.Label>Product Description:</Form.Label>
+
+              <Form.Group controlId="Customer_id">
+                <Form.Label>Customer Id:</Form.Label>
                 <Form.Control
                   type="text"
-                  name="productDescription"
-                  placeholder="productDescription"
+                  name="Customer_id"
+                  placeholder="Customer_id"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.productDescription}
+                  value={values.Customer_id}
                   className={
-                    touched.productDescription && errors.productDescription
+                    touched.Customer_id && errors.Customer_id
                       ? "error"
                       : null
                   }
                 />
 
-                {touched.productDescription && errors.productDescription ? (
+                {touched.Customer_id && errors.Customer_id ? (
                   <div className="error-message">
-                    {errors.productDescription}
+                    {errors.Customer_id}
                   </div>
                 ) : null}
               </Form.Group>
-              <Form.Group controlId="manufacturer">
-                <Form.Label>Manufacturer :</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="manufacturer"
-                  placeholder="manufacturer"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.manufacturer}
-                  className={
-                    touched.manufacturer && errors.manufacturer ? "error" : null
-                  }
-                />
-                {touched.manufacturer && errors.manufacturer ? (
-                  <div className="error-message">{errors.manufacturer}</div>
-                ) : null}
-              </Form.Group>
-              <Form.Group controlId="price">
-                <Form.Label>Price:</Form.Label>
-                <Form.Control
-                  type="price"
-                  name="price"
-                  placeholder="price"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.price}
-                  className={touched.price && errors.price ? "error" : null}
-                />
-                {touched.price && errors.price ? (
-                  <div className="error-message">{errors.price}</div>
-                ) : null}
-              </Form.Group>
-              <Form.Group controlId="quantity">
-                <Form.Label>Quantity:</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="quantity"
-                  placeholder="quantity"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.quantity}
-                  className={
-                    touched.quantity && errors.quantity ? "error" : null
-                  }
-                />
-                {touched.quantity && errors.quantity ? (
-                  <div className="error-message">{errors.quantity}</div>
-                ) : null}
-              </Form.Group>
+             
+        
+                  
+            
 
               <BUTTON
                 variant="primary"

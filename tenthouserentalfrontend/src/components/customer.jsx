@@ -1,15 +1,16 @@
 import React,{useState,useEffect} from 'react';
 import CardView from './cardview'
 import {CardDeck,Form,FormControl,Button} from 'react-bootstrap'
+import {getAllCustomers} from "../Data/CustomerAPi"
 
 const Customer = (props) => {
     //----------------------------Retrieval and storage of user data---------------------------------------------------------------------
      const [data,setData]=useState([]);
        const[filter,setFilter]=useState("")
-    // useEffect(()=>{Userapi(handleData) },[])
+     useEffect(()=>{getAllCustomers(handleData) },[])
      let message="";
     // let view=[];
-    //  const handleData=(userdata)=>{ setData(userdata);}
+     const handleData=(userdata)=>{ setData(userdata);}
     
     //----------------------------------------------------------------------------------------------------------------------------
 
@@ -45,8 +46,12 @@ const Customer = (props) => {
         //  -------------------------------------------------------------------------------------------------------------------------------
         //
 
-         let view = data.map((detail) => {
-             return  <CardView info={detail} key={detail.id}/>})
+
+        let imgsrc="http://www.gravatar.com/avatar/?d=mp"
+         let view = data.map((detail,index) => {
+             return  <CardView info={detail} key={index} imgsrc={imgsrc} />})
+
+      
       
 const handleClick=()=>{
     props.history.push('/Customer/Add')

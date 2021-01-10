@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Form, Button } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import {loginUser} from "../Data/UserAPi"
 
 const CONTAINER = styled.div`
   background: #f7f9fa;
@@ -65,7 +66,7 @@ const BUTTON = styled(Button)`
   }
 `;
 
-let info = [];
+let values={}
 const initialValues = {
   email: "",
   password: "",
@@ -82,34 +83,18 @@ const validationSchema = Yup.object().shape({
     .required("*Email is required"),
 });
 
-// const ValidLogin = (username, passcode) => {
-//   const isvalid = info.some(
-//     (detail) => detail.Email === username && detail.Password === passcode
-//   );
-
-//   if (isvalid) {
-//     const udata = info.find(
-//       (detail) => detail.Email === username && detail.Password === passcode
-//     );
-
-//     loginUserData.userData(udata);
-//   } else {
-//     alert("incorrect data");
-//   }
-// };
 
 const Login = (props) => {
-  const [userInfo, setUserInfo] = useState([]);
-//   useEffect(() => {
-//     UserAPI.getData((detail) => setUserInfo(detail));
-//   }, []);
-//   info = userInfo;
+ 
   const onSubmit = (value, onSubmitProps) => {
-    // ValidLogin(value.email, value.password);
-    // islogin.userLoggedIn();
-   console.log(value)
+    values={
+      email:value.email,
+      password:value.password
+    }
+   loginUser(values)
+   console.log("---------",values)
+    console.log("-------",localStorage.getItem('jsonToken'))
     props.history.push("/Products");
-
     onSubmitProps.resetForm();
   };
 
@@ -149,7 +134,7 @@ const Login = (props) => {
                   <div className="error-message">{errors.email}</div>
                 ) : null}
               </Form.Group>
-              <Form.Group controlId="formName">
+              <Form.Group controlId="formPassword">
                 <Form.Label>Password :</Form.Label>
                 <Form.Control
                   type="password"
@@ -157,12 +142,12 @@ const Login = (props) => {
                   placeholder="password"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.name}
-                  className={touched.name && errors.name ? "error" : null}
+                  value={values.password}
+                  className={touched.password && errors.password ? "error" : null}
                 />
 
-                {touched.name && errors.name ? (
-                  <div className="error-message">{errors.name}</div>
+                {touched.password && errors.password ? (
+                  <div className="error-message">{errors.password}</div>
                 ) : null}
               </Form.Group>
 

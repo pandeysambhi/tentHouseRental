@@ -1,11 +1,40 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
+import {getDetailedReport} from "../Data/ReportApi"
+import {Table,Container} from "react-bootstrap"
+import TableView from "./tabledata"
 
-const detailedReport = () => {
+const DetailedReport = () => {
+
+    const [data,setData]=useState([]);
+       useEffect(()=>{getDetailedReport(handleData) },[])
+       const handleData=(userdata)=>{ setData(userdata)}
+
+       console.log("detailed",data)
+      
+    let tabledata=data.map((detail,index)=>{ return <TableView info={detail} key={index} type="detailed" />})
+
+
     return (
-        <div>
-            
+        <div style={{marginTop:80}}>
+            <h4>Summary Report</h4>
+            <Container>
+            <Table striped bordered hover size='sm'>
+  <thead>
+    <tr>
+      <th>Sr No</th>
+      <th>ProductId</th>
+      <th>Type</th>
+      <th>Date</th>
+      </tr>
+  </thead>
+  <tbody>
+    {tabledata}
+  </tbody>
+</Table>
+</Container>
+
         </div>
     );
 };
 
-export default detailedReport;
+export default DetailedReport;
