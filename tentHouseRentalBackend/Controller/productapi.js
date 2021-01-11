@@ -16,7 +16,7 @@ router.get("/",async (req,res)=>{
 
 })
 
-router.post("/add",auth,async (req,res)=>{
+router.post("/Add",auth,async (req,res)=>{
    
   let product = await Product.findOne({ Product_title: req.body.Product_title });
   if (product) return res.status(400).json({ error: "Product already present." });
