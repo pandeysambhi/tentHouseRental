@@ -13,12 +13,13 @@ import Rent from "../components/rentItems"
 import Return from "../components/returnItems"
 import Layout from "../components/layout"
 
-const Routes = () => {
+const Routes = (props) => {
     return (
         <div>
           <Router>
           <Layout />
           <Switch>
+            
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/Login" component={Login} />
             <Route exact path="/register" component={Register} />

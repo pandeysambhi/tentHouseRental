@@ -93,9 +93,11 @@ const Login = (props) => {
       password:value.password
     }
    loginUser(values)
-   console.log("---------",values)
-    console.log("-------",localStorage.getItem('jsonToken'))
+   
+   
+
     props.history.push("/Products");
+  
     onSubmitProps.resetForm();
   };
 

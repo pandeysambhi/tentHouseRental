@@ -1,9 +1,36 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Navbar, Nav, NavDropdown,Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Layout = (props) => {
-   
+const Layout = () => {
+   const [loginState,setloginState]=React.useState("Login")
+   const[flag,setFlag]=React.useState(false)
+   const[token,setToken]=React.useState(null)
+   let history = useHistory();
+
+   React.useEffect(()=>{
+    //  console.log(localStorage.getItem('jsonToken'))
+    //  setToken(localStorage.getItem('jsonToken'))
+    //  console.log(token)
+    window.addEventListener('storage', () => {
+   setFlag((newValue)=>!newValue);
+  //  setCart(JSON.parse(localStorage.getItem('myCart')) || [])
+   setToken(localStorage.getItem('jsonToken'))   
+});
+   },[flag])
+
+  
+  
+   const handleClick=()=>{
+         setFlag((newValue)=>!newValue);
+    if(localStorage.getItem('jsonToken')!=null){
+               localStorage.removeItem('jsonToken')
+    }
+
+    history.push('/Login')
+}
+
   return (
     <div className="navbar">
       <Navbar bg="dark" variant="dark" fixed="top" style={{ fontWeight: 500 }}>
@@ -28,16 +55,13 @@ const Layout = (props) => {
           </NavDropdown>
             <Nav.Link as={Link} to="/report/summary" >
             Report
-          </Nav.Link>
+           </Nav.Link>
 
 
-            <Nav.Link as={Link} to="/Login">
-           Login
-          </Nav.Link>
-           {/* <Button  variant="dark"  onClick={handleClick} style={{ textColor: "white" }}>
-           {text}
+           <Button  variant="dark"  onClick={handleClick} style={{ textColor: "white" }}>
+           {localStorage.getItem('jsonToken')?"Logout":"Login"}
           </Button>
-           */}
+          
 
           
         </Nav>
