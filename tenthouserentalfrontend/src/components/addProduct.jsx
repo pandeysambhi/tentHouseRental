@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { Prompt, matchPath } from "react-router-dom";
 import { Formik } from "formik";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button,Alert } from "react-bootstrap";
 import styled from "styled-components";
 import * as Yup from "yup";
 import {addNewProduct} from '../Data/ProductApi'
+
 
 
 const CONTAINER = styled.div`
   background: #f7f9fa;
   height: auto;
   width: 90%;
-  margin: 5em auto;
+  margin: 2em auto;
   color: snow;
   -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
@@ -69,6 +70,7 @@ const BUTTON = styled(Button)`
 `;
 
 let values = {};
+let success=false;
 const initialValues = {
   Product_title: "",
  Product_id: "",
@@ -97,9 +99,13 @@ function AddProduct() {
       price: value.price,
       Quantity_booked: value.Quantity_booked,
     };
-    let views = 0;
-    addNewProduct(values)
-    // ViewDataAPI.saveViewData(views);
+    <Alert variant='success'> <Alert.Heading>Hey, nice to see you</Alert.Heading></Alert>
+   success= addNewProduct(values)
+  
+   if(success==true)
+   {
+     <Alert variant='success'> <Alert.Heading>Hey, nice to see you</Alert.Heading></Alert>
+   }
     console.log(values)
     setIsSubmitted(true);
     onSubmitProps.resetForm();
@@ -151,7 +157,7 @@ function AddProduct() {
                 ) : null}
               </Form.Group>
               <Form.Group controlId="Product_id">
-                <Form.Label>Product Description:</Form.Label>
+                <Form.Label>Product Id:</Form.Label>
                 <Form.Control
                   type="text"
                   name="Product_id"
@@ -228,7 +234,7 @@ function AddProduct() {
                 disabled={isSubmitting}
                 style={{ marginRight: 15 }}
               >
-                Submit
+               Add Product
               </BUTTON>
               <BUTTON variant="primary" type="reset">
                 Cancel

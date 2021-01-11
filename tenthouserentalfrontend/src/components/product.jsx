@@ -2,7 +2,8 @@ import React,{useState,useEffect} from 'react';
 import CardView from './cardview'
 import {CardDeck,Form,FormControl,Button} from 'react-bootstrap'
 import {getAllProducts} from "../Data/ProductApi"
-
+import { render } from "@testing-library/react";
+import PromptModal from './modalPrompt'
 
 const Product=(props)=>{
   //----------------------------Retrieval and storage of user data---------------------------------------------------------------------
@@ -49,11 +50,18 @@ const Product=(props)=>{
 
         const imgsrc="https://via.placeholder.com/150/000000/FFFFFF/?text=product"
          let view = data.map((detail,index) => {
-             return  <CardView info={detail} key={index} imgsrc={imgsrc}/>})
+             return  <CardView info={detail} key={index} imgsrc={imgsrc} history={props.history}/>})
       
         
 const handleClick=()=>{
-    props.history.push('/Products/Add')
+  const token=localStorage.getItem('jsonToken')
+  let val=(token==null)
+  if(val)
+   render(<PromptModal history={props.history} from="products"/>);
+    
+   else
+   props.history.push('/Products/Add')
+  
 }
 
     return(

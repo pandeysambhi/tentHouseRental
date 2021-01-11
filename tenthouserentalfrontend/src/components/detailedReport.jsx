@@ -11,13 +11,13 @@ const DetailedReport = () => {
 
        console.log("detailed",data)
       
-    let tabledata=data.map((detail,index)=>{ return <TableView info={detail} key={index} type="detailed" />})
+    let tabledata=data.map((detail,index)=>{ return <TableView info={detail} key={index} num={index} type="detailed" />})
 
 
     return (
         <div style={{marginTop:80}}>
-            <h4>Summary Report</h4>
-            <Container>
+            <h4>Detailed Report</h4>
+            <Container style={{marginTop:50}}>
             <Table striped bordered hover size='sm'>
   <thead>
     <tr>

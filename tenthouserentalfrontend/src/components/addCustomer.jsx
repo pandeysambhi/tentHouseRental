@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Prompt, matchPath } from "react-router-dom";
 import { Formik } from "formik";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button,Alert } from "react-bootstrap";
 import styled from "styled-components";
 import * as Yup from "yup";
 import {addNewCustomer} from "../Data/CustomerAPi"
-
+import { render } from "@testing-library/react";
 
 const CONTAINER = styled.div`
   background: #f7f9fa;
   height: auto;
   width: 90%;
-  margin: 5em auto;
+  margin: 2em auto;
   color: snow;
   -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
@@ -90,9 +90,9 @@ function AddCustomer() {
      name: value.name,
      Customer_id:value.Customer_id
     };
-    let views = 0;
+  window.alert()
    addNewCustomer(values);
-    // ViewDataAPI.saveViewData(views);
+   
     console.log(values)
     setIsSubmitted(true);
     onSubmitProps.resetForm();
@@ -177,7 +177,7 @@ function AddCustomer() {
                 disabled={isSubmitting}
                 style={{ marginRight: 15 }}
               >
-                Submit
+                Add Customer
               </BUTTON>
               <BUTTON variant="primary" type="reset">
                 Cancel

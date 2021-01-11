@@ -1,22 +1,41 @@
 import React,{useState,useEffect} from 'react';
 import {getSummaryReport} from "../Data/ReportApi"
-import {Table,Container} from "react-bootstrap"
+import {Table,Container,Button} from "react-bootstrap"
 import TableView from "./tabledata"
 
-const SummaryReport = () => {
+const SummaryReport = (props) => {
 
     const [data,setData]=useState([]);
        useEffect(()=>{getSummaryReport(handleData) },[])
        const handleData=(userdata)=>{ setData(userdata)}
 
-       console.log("summary",data)
+       const handleClick=()=>{
+              props.history.push("/report/detailed")
+       }
 
-    let tabledata=data.map((detail,index)=>{ return <TableView info={detail} key={index} type="summary" />})
+    let tabledata=data.map((detail,index)=>{ return <TableView info={detail} key={index} num={index} type="summary" />})
 
 
     return (
-        <div style={{marginTop:80}}>
-            <h4>Summary Report</h4>
+        <div style={{marginTop:30,marginBotom:50}}>
+         <div
+          style={{
+            display: "flex",
+            marginLeft:'55px',
+            marginTop: 50,
+          }}
+        >
+          <Button
+            variant="success"
+            size="md"
+            onClick={handleClick}
+            style={{ marginRight: 15, fontWeight: 600, marginLeft: 15 }}
+          >
+            View detailed Report
+          </Button>
+          
+          </div>
+          <h3>Summary Report</h3>
             <Container>
             <Table striped bordered hover size='sm'>
   <thead>
@@ -32,6 +51,7 @@ const SummaryReport = () => {
 </Table>
 </Container>
 
+        
         </div>
     );
 };

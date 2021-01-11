@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react';
 import CardView from './cardview'
 import {CardDeck,Form,FormControl,Button} from 'react-bootstrap'
 import {getAllCustomers} from "../Data/CustomerAPi"
+import { render } from "@testing-library/react";
+import PromptModal from './modalPrompt'
 
 const Customer = (props) => {
     //----------------------------Retrieval and storage of user data---------------------------------------------------------------------
@@ -49,12 +51,18 @@ const Customer = (props) => {
 
         let imgsrc="http://www.gravatar.com/avatar/?d=mp"
          let view = data.map((detail,index) => {
-             return  <CardView info={detail} key={index} imgsrc={imgsrc} />})
+             return  <CardView info={detail} key={index} imgsrc={imgsrc} type="customer" />})
 
       
       
 const handleClick=()=>{
-    props.history.push('/Customer/Add')
+    const token=localStorage.getItem('jsonToken')
+  let val=(token==null)
+  if(val)
+   render(<PromptModal history={props.history} from="customer"/>);
+    
+   else
+   props.history.push('/Customer/Add')
 }
 
     return(

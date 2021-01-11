@@ -10,7 +10,7 @@ const CONTAINER = styled.div`
   background: #f7f9fa;
   height: auto;
   width: 90%;
-  margin: 5em auto;
+  margin: 2em auto;
   color: snow;
   -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
@@ -101,9 +101,9 @@ const Register = (props) => {
   };
 
   return (
-    <div style={{ marginTop: 50 }}>
+    <div style={{ margin:'5em auto' }}>
       <h4 style={{ textAlign: "center", margin: "auto" }}>
-        Log In to Continue
+        Register New User
       </h4>
       <CONTAINER>
         <Formik

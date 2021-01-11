@@ -12,7 +12,7 @@ const CONTAINER = styled.div`
   background: #f7f9fa;
   height: auto;
   width: 90%;
-  margin: 5em auto;
+  margin: 2em auto;
   color: snow;
   -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
@@ -69,6 +69,7 @@ const BUTTON = styled(Button)`
   }
 `;
 
+//form to collect data of items to be returned.
 let values = {};
 const initialValues = {
   Customer_id: "",
@@ -98,10 +99,8 @@ function ReturnItems() {
       type: value.type,
      
     };
-    let views = 0;
+   
     returnProducts(values)
-    // ViewDataAPI.saveViewData(views);
-    console.log(values)
     setIsSubmitted(true);
     onSubmitProps.resetForm();
   };
@@ -213,7 +212,7 @@ function ReturnItems() {
                 disabled={isSubmitting}
                 style={{ marginRight: 15 }}
               >
-                Submit
+                Return Item
               </BUTTON>
               <BUTTON variant="primary" type="reset">
                 Cancel

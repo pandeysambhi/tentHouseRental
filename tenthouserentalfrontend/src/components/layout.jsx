@@ -6,17 +6,17 @@ const Layout = (props) => {
    
   return (
     <div className="navbar">
-      <Navbar bg="dark" variant="dark" fixed="top" style={{ fontWeight: 600 }}>
-        <Navbar.Brand as={Link} to="/">PIM</Navbar.Brand>
-        <Nav className="justify-content-end" style={{ width: "90%" }}>
-          <Nav.Link as={Link} to="/Products">
+      <Navbar bg="dark" variant="dark" fixed="top" style={{ fontWeight: 500 }}>
+        <Navbar.Brand as={Link} to="/">TRM</Navbar.Brand>
+        <Nav className="justify-content-end" variant="pills" style={{ width: "100%",fontSize:18 }}>
+          <Nav.Link as={Link} to="/Products" >
             Products
           </Nav.Link>
-           <Nav.Link as={Link} to="/Customer" style={{ textColor: "white" }}>
+           <Nav.Link as={Link} to="/Customer" >
            Customer
           </Nav.Link>
 
-           <NavDropdown title="Transaction" id="basic-nav-dropdown">
+           <NavDropdown title="Transaction" id="basic-nav-dropdown" >
             <NavDropdown.Item as={Link} to="/transaction/rent">
              Rent Items
             </NavDropdown.Item>
@@ -26,12 +26,12 @@ const Layout = (props) => {
             </NavDropdown.Item>
             
           </NavDropdown>
-            <Nav.Link as={Link} to="/report/summary" style={{ textColor: "white" }}>
+            <Nav.Link as={Link} to="/report/summary" >
             Report
           </Nav.Link>
 
 
-            <Nav.Link as={Link} to="/Login" style={{ textColor: "white" }}>
+            <Nav.Link as={Link} to="/Login">
            Login
           </Nav.Link>
            {/* <Button  variant="dark"  onClick={handleClick} style={{ textColor: "white" }}>
@@ -46,7 +46,7 @@ const Layout = (props) => {
         <Nav>
           <Navbar.Text>All rights reserved | </Navbar.Text>
 
-          <Navbar.Text>| Copyright@Pim</Navbar.Text>
+          <Navbar.Text>| Copyright@TRM</Navbar.Text>
         </Nav>
       </Navbar>
     </div>

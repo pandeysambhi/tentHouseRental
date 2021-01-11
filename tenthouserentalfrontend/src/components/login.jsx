@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Form, Button } from "react-bootstrap";
+import {Link} from 'react-router-dom'
 import { Formik } from "formik";
 import * as Yup from "yup";
 import {loginUser} from "../Data/UserAPi"
@@ -9,7 +10,7 @@ const CONTAINER = styled.div`
   background: #f7f9fa;
   height: auto;
   width: 90%;
-  margin: 5em auto;
+  margin: 2em auto;
   color: snow;
   -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
@@ -99,7 +100,7 @@ const Login = (props) => {
   };
 
   return (
-    <div style={{ marginTop: 50 }}>
+    <div style={{ margin: '5em auto' }}>
       <h4 style={{ textAlign: "center", margin: "auto" }}>
         Log In to Continue
       </h4>
@@ -162,10 +163,12 @@ const Login = (props) => {
               <BUTTON variant="primary" type="reset">
                 Cancel
               </BUTTON>
+             
             </MYFORM>
           )}
         </Formik>
-      </CONTAINER>
+        </CONTAINER>
+            <Form.Text style={{color:'black',fontSize:20}}>Don't have an account!<a href='/register'>Signup</a></Form.Text>
     </div>
   );
 };
