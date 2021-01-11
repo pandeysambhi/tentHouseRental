@@ -91,8 +91,9 @@ const Register = (props) => {
   
  const onSubmit = (value, onSubmitProps) => {
     values={
-      email:props.email,
-      password:props.password
+      email:value.email,
+      password:value.password,
+      name:value.name
     }
    addNewUser(values)
     console.log("-------",localStorage.getItem('jsonToken'))

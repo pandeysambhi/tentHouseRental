@@ -10,17 +10,15 @@ const Layout = () => {
    let history = useHistory();
 
    React.useEffect(()=>{
-    //  console.log(localStorage.getItem('jsonToken'))
-    //  setToken(localStorage.getItem('jsonToken'))
-    //  console.log(token)
+    
     window.addEventListener('storage', () => {
    setFlag((newValue)=>!newValue);
-  //  setCart(JSON.parse(localStorage.getItem('myCart')) || [])
+ 
    setToken(localStorage.getItem('jsonToken'))   
 });
    },[flag])
 
-  
+
   
    const handleClick=()=>{
          setFlag((newValue)=>!newValue);
